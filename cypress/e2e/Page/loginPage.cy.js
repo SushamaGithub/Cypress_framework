@@ -1,46 +1,40 @@
 //login to the applocation
 class LoginPage {
- consrtuctor() {
-    this.loginButton = 'button[type="submit"]';
+  constructor() {
+    this.loginButton = '[value="Login"]';
     this.emailAddress = 'input[name="email"]';
     this.password = 'input[name="password"]';
-   // this.errorMessage = ".";
     this.logout = ".list-group-item";
- }
+  }
 
- openUrl() {
+  openUrl() {
     cy.visit(this.url);
   }
 
   loginbuttonexist() {
-    //cy.get(this.LoginButton).contains('Login').should('be.visible');
-    return cy.get(this.loginButton);
+    cy.get(this.loginButton).should("be.visible");
   }
   enteremailAddress(email) {
     cy.get(this.emailAddress).type(email);
-
   }
 
-  enterPassword(psw) {
-    cy.get(this.password).type(psw);
+  enterPassword(password) {
+    cy.get(this.password).type(password);
   }
-
   clickLogin() {
     cy.get(this.loginButton).click();
   }
 
   usr_logged_in() {
-    cy.get("h2.card-header.h5")
-      .contains("My Account")
-      .should("be.visible");
+    cy.get("h2.card-header.h5").contains("My Account").should("be.visible");
   }
-  //user_logout() {
-    //cy.get(this.logout).click();
-    //cy.get('[role="menuitem"]').eq(3).click();
-    //cy.get(this.LoginB).contains("Login").should("be.visible");
+  user_logout() {
+  cy.get(this.logout).eq(13).click();
+  }
 
-  //}
-
+  getErrorMessage(){
+    cy.contains(' Warning')
+  }
 }
 
 module.exports = LoginPage;
