@@ -2,9 +2,14 @@
 class LoginPage {
   constructor() {
     this.loginButton = '[value="Login"]';
-    this.emailAddress = 'input[name="email"]';
-    this.password = 'input[name="password"]';
+    //this.emailAddress = 'input[name="email"]';
+      this.emailAddress = '#input-email';
+
+    //this.password = 'input[name="password"]';
+    this.password = '#input-password';
+
     this.logout = ".list-group-item";
+    this.editAccount = ".list-group-item";
   }
 
   openUrl() {
@@ -24,7 +29,9 @@ class LoginPage {
   clickLogin() {
     cy.get(this.loginButton).click();
   }
-
+  clickEditAccount() {
+    cy.get(this.editAccount).eq(1).click();
+  }
   usr_logged_in() {
     cy.get("h2.card-header.h5").contains("My Account").should("be.visible");
   }

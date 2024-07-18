@@ -36,6 +36,13 @@ describe('Login Test', () => {
         loginpage.getErrorMessage();
         //cy.url().should('not.include' , '/web/index.php/dashboard/index');
     })
-
+    it ('Edit Account', () => {
+        loginpage.enteremailAddress(testdata.emailAddress);
+        loginpage.enterPassword(testdata.password);
+        loginpage.clickLogin();
+        cy.url().should('include', 'https://ecommerce-playground.lambdatest.io/index.php?route=account/account');
+        loginpage.clickEditAccount() ;
+        loginpage.user_logout()
+    })
 
 });
