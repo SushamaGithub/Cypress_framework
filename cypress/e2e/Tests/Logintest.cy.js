@@ -1,8 +1,11 @@
 // <reference types="cypress" />
 
 import LoginPage from "../Page/loginPage.cy.js";
+import accountInfo from "../../fixtures/accountInfomation.json";
+
 describe('Login Test', () => {
     let testdata;
+    const emailAddress =getEmailAddress('yahoo.com')
     const loginpage = new LoginPage();
 
     beforeEach(() => {
@@ -42,7 +45,48 @@ describe('Login Test', () => {
         loginpage.clickLogin();
         cy.url().should('include', 'https://ecommerce-playground.lambdatest.io/index.php?route=account/account');
         loginpage.clickEditAccount() ;
+        cy.get('#input-firstname').should('value', 'David');
         loginpage.user_logout()
     })
+    it ('NewsLetter', () => {
+        loginpage.enteremailAddress(testdata.emailAddress);
+        loginpage.enterPassword(testdata.password);
+        loginpage.clickLogin();
+        cy.url().should('include', 'https://ecommerce-playground.lambdatest.io/index.php?route=account/account');
+        loginpage.clickNewsletter() ;
+        loginpage.clickbackButton();
+
+        //loginpage.user_logout()
+    })
+    it.only ('Fill Account Information', () => {
+
+        //getEmailAddress('gmail')
+ 
+         //cy.log (" Hi This is Random generated email", getEmailAddress('yopmail.com'))
+         loginpage.enteremailAddress(testdata.emailAddress);
+         loginpage.enterPassword(testdata.password);
+         loginpage.clickLogin();
+         cy.get('.list-group-item').eq(1).click()
+        
+         for (let i=0;i<accountInfo.accountInformation.length;i++){
+             loginpage.fillAccountInformation(accountInfo.accountInformation[i])
+ 
+         }
+     })
+
+     it ('Register users', () => {
+
+        loginpage.clickRegisterMenu();
+         for (let i=0;i<accountInfo.userRegistration.length;i++){
+             loginpage.fillUserRegistration(accountInfo.userRegistration[i])
+ 
+         } 
+     })
 
 });
+
+function getEmailAddress(domain)
+{
+    const randomEmail =Math.random().toString(36).substring(7)    // 12gsgjs
+    return randomEmail +'@' + domain ///  12gsgjs@yahoo.com
+}
