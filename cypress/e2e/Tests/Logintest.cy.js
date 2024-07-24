@@ -58,7 +58,7 @@ describe('Login Test', () => {
 
         //loginpage.user_logout()
     })
-    it.only ('Fill Account Information', () => {
+    it ('Fill Account Information', () => {
 
         //getEmailAddress('gmail')
  
@@ -74,7 +74,7 @@ describe('Login Test', () => {
          }
      })
 
-     it ('Register users', () => {
+     it.only ('Register users', () => {
 
         loginpage.clickRegisterMenu();
          for (let i=0;i<accountInfo.userRegistration.length;i++){

@@ -69,12 +69,13 @@ class LoginPage {
     cy.get('.list-group-item').eq(1).click()
   } 
   fillUserRegistration(accountInfo) {
-    cy.get(this.firstName).clear().type(accountInfo.registerUser.firstName);
-    cy.get(this.lastName).clear().type(accountInfo.registerUser.lastName);
-    cy.get(this.telephoneNumber).clear().type(accountInfo.registerUser.telephoneNumber);
-    cy.get(this.emailAddress).clear().type(accountInfo.registerUser.emailAddress);
-    cy.get(this.password).clear().type(accountInfo.registerUser.password);
-    cy.get(this.password).clear().type(accountInfo.registerUser.confirmpwd);
+    cy.log (accountInfo.firstName);
+    cy.get(this.firstName).clear().type(accountInfo.userRegistration.firstName);
+    cy.get(this.lastName).clear().type(accountInfo.userRegistration.lastName);
+    cy.get(this.telephoneNumber).clear().type(accountInfo.userRegistration.telephoneNumber);
+    cy.get(this.emailAddress).clear().type(accountInfo.userRegistration.emailAddress);
+    cy.get(this.password).clear().type(accountInfo.userRegistration.password);
+    cy.get(this.password).clear().type(accountInfo.userRegistration.confirmpwd);
     cy.get('[value="Continue"]').click()
     cy.contains('Success:').should('be.visible')
     cy.get('.list-group-item').eq(1).click()
